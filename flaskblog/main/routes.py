@@ -6,10 +6,10 @@ from flaskblog.models import Post
 main = Blueprint('main', __name__)
 
 
-@main.before_first_request
-def create_tables():
-    print("workoin")
-    db.create_all()
+# @main.before_first_request
+# def create_tables():
+#     print("workoin")
+#     db.create_all()
 
 
 @main.route('/')
@@ -17,7 +17,7 @@ def create_tables():
 def home():
     page = request.args.get('page', 1, type=int)
     print('page', page)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=4)
     return render_template('home.html', posts=posts)
 
 
